@@ -30,6 +30,7 @@ public class ImageSave{
             throw new ImageUploadException();
             //내가 만든 커스텀 예외.
             //직접 만든 예외라서 적절히 변경하여 사용.
+            //https://github.com/ezcolin2/Spring-Class/blob/main/image%20upload/ImageUploadException
             
         }
         return new Image(originName, storedImagePath);
