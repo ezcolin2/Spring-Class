@@ -15,7 +15,9 @@ public class ImageSave{
         return "c:\\images\\"+changedName;
         //이미지가 저장될 경로. 필요에 따라 경로 조정
     }
-
+    
+    //Image는 내가 만든 클래스. 원래 파일 이름과 저장된 경로+파일 이름. 두가지 필드를 가지고 있음
+    //https://github.com/ezcolin2/Spring-Class/blob/main/image%20upload/Image
     public static Image uploadImage(MultipartFile image) {
         String originName = image.getOriginalFilename();
         String changedName = changedImageName(originName);
