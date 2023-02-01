@@ -1,0 +1,11 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class Image {
+    //요청을 하면 클라이언트에게 originName을 보여주고
+    //storedImagePath에 저장된 경로에서 불러오면 됨
+    private String originName;
+    private String storedImagePath;
+}
