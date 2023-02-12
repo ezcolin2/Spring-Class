@@ -1,0 +1,1 @@
+String email = SecurityContextHolder.getContext().getAuthentication().getName();
