@@ -1,0 +1,9 @@
+public class ValidationController {
+
+    @RequestMapping("/valid")
+    public ResponseEntity<String> join(@Valid @RequestBody RequestDto dto) {
+        .
+        .
+        .
+    }
+}
