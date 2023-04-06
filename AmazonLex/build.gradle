@@ -1,0 +1,6 @@
+dependencies {
+	implementation platform('software.amazon.awssdk:bom:2.20.4')
+	implementation 'software.amazon.awssdk:auth'
+	implementation 'software.amazon.awssdk:lexruntimev2'
+	implementation 'software.amazon.awssdk:regions'
+}
