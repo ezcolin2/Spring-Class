@@ -1,5 +1,6 @@
 @Component
 public class JwtUtil {
+    
     @Value("${jwt.secretKey}") //application.properties에 저장되어 있는 값을 가져온다.
     private String secretKey;
     @Value("${jwt.expiredMs}") //application.properties에 저장되어 있는 값을 가져온다.
