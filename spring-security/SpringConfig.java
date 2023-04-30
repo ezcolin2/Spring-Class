@@ -11,6 +11,7 @@ public class SecurityConfig {
                 .cors().and()
                 .authorizeRequests()
                 .requestMatchers("/api/users/login", "/api/users/join").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .build();
     }
