@@ -1,3 +1,5 @@
+package com.example.oauth2.oauth2;
+
 public interface OAuth2MemberInfo {
     String getProviderId(); //공급자 아이디 ex) google, facebook
     String getProvider(); //공급자 ex) google, facebook

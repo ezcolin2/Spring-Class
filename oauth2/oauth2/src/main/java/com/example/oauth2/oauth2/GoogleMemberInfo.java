@@ -1,17 +1,21 @@
-public class FacebookMemberInfo implements OAuth2MemberInfo{
+package com.example.oauth2.oauth2;
+
+import java.util.Map;
+
+public class GoogleMemberInfo implements OAuth2MemberInfo{
+    public GoogleMemberInfo(Map<String, Object> attributes) {
+        this.attributes = attributes;
+    }
+
     private Map<String, Object> attributes;
     @Override
     public String getProviderId() {
-        return (String) attributes.get("id");
-    }
-
-    public FacebookMemberInfo(Map<String, Object> attributes) {
-        this.attributes = attributes;
+        return (String) attributes.get("sub");
     }
 
     @Override
     public String getProvider() {
-        return "facebook";
+        return "google";
     }
 
     @Override

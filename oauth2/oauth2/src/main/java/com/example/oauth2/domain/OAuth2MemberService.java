@@ -1,3 +1,17 @@
+package com.example.oauth2.domain;
+
+import com.example.oauth2.oauth2.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class OAuth2MemberService extends DefaultOAuth2UserService {
@@ -12,12 +26,15 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         System.out.println(userRequest.getClientRegistration().getRegistrationId());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        System.out.println("registrationId = " + registrationId);
         if (registrationId.equals("google")) {
             memberInfo = new GoogleMemberInfo(oAuth2User.getAttributes());
         } else if (registrationId.equals("facebook")) {
             memberInfo = new FacebookMemberInfo(oAuth2User.getAttributes());
         } else if (registrationId.equals("naver")) {
             memberInfo = new NaverMemberInfo((Map)oAuth2User.getAttributes().get("response"));
+        } else if (registrationId.equals("kakao")) {
+            memberInfo = new KakaoMemberInfo(oAuth2User.getAttributes());
         } else {
             System.out.println("로그인 실패");
         }

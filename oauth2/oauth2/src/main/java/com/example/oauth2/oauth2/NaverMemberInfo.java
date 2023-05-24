@@ -1,5 +1,9 @@
-public class GoogleMemberInfo implements OAuth2MemberInfo{
-    public GoogleMemberInfo(Map<String, Object> attributes) {
+package com.example.oauth2.oauth2;
+
+import java.util.Map;
+
+public class NaverMemberInfo implements OAuth2MemberInfo{
+    public NaverMemberInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
     }
 
@@ -11,7 +15,7 @@ public class GoogleMemberInfo implements OAuth2MemberInfo{
 
     @Override
     public String getProvider() {
-        return "google";
+        return "naver";
     }
 
     @Override
