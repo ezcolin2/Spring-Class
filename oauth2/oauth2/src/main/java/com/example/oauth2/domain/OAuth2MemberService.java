@@ -40,14 +40,16 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         }
         String provider = memberInfo.getProvider();
         String providerId = memberInfo.getProviderId();
-        String username = provider + "_" + providerId; //중복이 발생하지 않도록 provider와 providerId를 조합
+        String oauth2Id = provider + "_" + providerId; //중복이 발생하지 않도록 provider와 providerId를 조합
+        String username = memberInfo.getName();
         String email = memberInfo.getEmail();
         String role = "ROLE_ADMIN"; //일반 유저
         System.out.println(oAuth2User.getAttributes());
-        Optional<Member> findMember = memberRepository.findByName(username);
+        Optional<Member> findMember = memberRepository.findByOauth2Id(oauth2Id);
         Member member=null;
         if (findMember.isEmpty()) { //찾지 못했다면
             member = Member.builder()
+                    .oauth2Id(oauth2Id)
                     .name(username)
                     .email(email)
                     .password(encoder.encode("password"))
