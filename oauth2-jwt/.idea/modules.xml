@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/oauth2-jwt.iml" filepath="$PROJECT_DIR$/.idea/oauth2-jwt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oauth2-jwt.oauth2-jwt.main.iml" filepath="$PROJECT_DIR$/.idea/modules/oauth2-jwt.oauth2-jwt.main.iml" />
+    </modules>
+  </component>
+</project>
