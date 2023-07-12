@@ -1,0 +1,63 @@
+name: Java CI/CD
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - uses: actions/checkout@v3
+      - run: touch ./src/main/resources/application.properties
+      - run: echo "${{ secrets.PROPERTIES }}" > ./src/main/resources/application.properties
+      - run: cat ./src/main/resources/application.properties
+      - name: make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Make dir
+        run: mkdir cicd
+
+      - name: Copy jar
+        run: cp ./build/libs/*.jar ./cicd
+
+      - name: Copy appspec
+        run: cp ./appspec.yml ./cicd
+
+      - name: Copy script
+        run: cp ./deploy.sh ./cicd
+
+      - name: Make zip
+        run: zip -r -qq -j ./deploy.zip ./cicd
+      - run: ls -al
+
+      - name: Upload S3
+        run: aws s3 cp --region ${{ secrets.AWS_REGION }} ./deploy.zip s3://ci-cd-test-123/ci-cd/
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name cd-test --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name CD --s3-location bucket=ci-cd-test-123,bundleType=zip,key=ci-cd/deploy.zip
+
+
