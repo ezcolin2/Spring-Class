@@ -1,0 +1,5 @@
+# Date 타입 직렬화, 역직렬화
+spring:
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss.SSS"
+    time-zone: "GMT+8"
